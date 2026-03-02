@@ -14,7 +14,10 @@ export default function RootLayout({ children }) {
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
+
+    <script>window.$zoho=window.$zoho || {};$zoho.salesiq=$zoho.salesiq||{ready:function(){}}</script><script id="zsiqscript" src="https://salesiq.zohopublic.com/widget?wc=siq8263b309495b54b189c0cd864b1a611bb88a012ae2562f1d8a6e8be3d8ea6f41" defer></script>
       </body>
     </html>
   );
 }
+
