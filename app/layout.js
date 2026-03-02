@@ -1,4 +1,5 @@
 import './globals.css';
+import Script from 'next/script';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
@@ -15,9 +16,16 @@ export default function RootLayout({ children }) {
         <main className="flex-1">{children}</main>
         <Footer />
 
-    <script>window.$zoho=window.$zoho || {};$zoho.salesiq=$zoho.salesiq||{ready:function(){}}</script><script id="zsiqscript" src="https://salesiq.zohopublic.com/widget?wc=siq8263b309495b54b189c0cd864b1a611bb88a012ae2562f1d8a6e8be3d8ea6f41" defer></script>
+        {/* Zoho SalesIQ Chat Widget */}
+        <Script id="zsiq-init" strategy="lazyOnload">
+          {`window.$zoho=window.$zoho || {};$zoho.salesiq=$zoho.salesiq||{ready:function(){}}`}
+        </Script>
+        <Script
+          id="zsiqscript"
+          src="https://salesiq.zohopublic.com/widget?wc=siq8263b309495b54b189c0cd864b1a611bb88a012ae2562f1d8a6e8be3d8ea6f41"
+          strategy="lazyOnload"
+        />
       </body>
     </html>
   );
 }
-
