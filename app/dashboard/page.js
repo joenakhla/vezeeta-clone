@@ -122,10 +122,10 @@ export default function Dashboard() {
           <p className="text-gray-500 mt-1">Manage appointments and view bookings</p>
         </div>
         <Link
-          href="/settings"
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+          href="/"
+          className="bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
         >
-          Webhook Settings
+          Back to Home
         </Link>
       </div>
 
@@ -235,9 +235,8 @@ export default function Dashboard() {
 
       {/* Info Banner */}
       <div className="mt-8 bg-blue-50 border border-blue-200 rounded-xl p-4 text-sm text-blue-800">
-        <strong>Note:</strong> This dashboard shows dummy booking data for testing.
-        When you make a real booking through the patient flow, the data is sent to your Zoho Flow webhook.
-        New bookings made through the site will appear here after page refresh (stored in session).
+        <strong>Note:</strong> This dashboard shows sample booking data.
+        New bookings made through the patient flow will appear here.
       </div>
     </div>
   );

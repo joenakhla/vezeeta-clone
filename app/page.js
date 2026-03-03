@@ -2,8 +2,9 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { specialties, doctors, searchDoctors } from '@/lib/data';
+import { specialties, doctors, searchDoctors, SALESIQ_DEPARTMENTS } from '@/lib/data';
 import DoctorCard from '@/components/DoctorCard';
+import SalesIQDepartment from '@/components/SalesIQDepartment';
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -18,21 +19,22 @@ export default function Home() {
     }
   }
 
-  // Top 4 doctors by rating for "Featured" section
   const featuredDoctors = [...doctors]
     .sort((a, b) => b.rating - a.rating)
     .slice(0, 4);
 
   return (
     <div>
+      <SalesIQDepartment department={SALESIQ_DEPARTMENTS.DOCTORS} />
+
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary-600 to-primary-800 text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Find & Book the Best Doctors
+            Your Health, One Click Away
           </h1>
           <p className="text-primary-100 text-lg mb-8 max-w-2xl mx-auto">
-            Search by specialty, doctor name, or location. Book your appointment instantly.
+            Book doctors, order medicines, schedule lab tests & scans — all in one place.
           </p>
 
           {/* Search Bar */}
@@ -67,10 +69,7 @@ export default function Home() {
               Search Results ({searchResults.length})
             </h2>
             <button
-              onClick={() => {
-                setSearchResults(null);
-                setSearchQuery('');
-              }}
+              onClick={() => { setSearchResults(null); setSearchQuery(''); }}
               className="text-primary-600 hover:underline text-sm"
             >
               Clear search
@@ -90,10 +89,44 @@ export default function Home() {
         </section>
       )}
 
-      {/* Specialties Grid */}
       {searchResults === null && (
         <>
-          <section className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
+          {/* ===== SERVICES QUICK ACCESS ===== */}
+          <section className="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <Link href="/doctors/general-practice">
+                <div className="bg-white rounded-xl p-6 text-center card-hover border border-gray-100 hover:border-primary-300">
+                  <div className="text-4xl mb-3">🩺</div>
+                  <h3 className="font-bold text-gray-900">Book a Doctor</h3>
+                  <p className="text-gray-400 text-xs mt-1">All specialties</p>
+                </div>
+              </Link>
+              <Link href="/pharmacy">
+                <div className="bg-white rounded-xl p-6 text-center card-hover border border-gray-100 hover:border-green-300">
+                  <div className="text-4xl mb-3">💊</div>
+                  <h3 className="font-bold text-gray-900">Pharmacy</h3>
+                  <p className="text-gray-400 text-xs mt-1">Order medicines</p>
+                </div>
+              </Link>
+              <Link href="/labs">
+                <div className="bg-white rounded-xl p-6 text-center card-hover border border-gray-100 hover:border-blue-300">
+                  <div className="text-4xl mb-3">🔬</div>
+                  <h3 className="font-bold text-gray-900">Lab Tests</h3>
+                  <p className="text-gray-400 text-xs mt-1">Blood work & more</p>
+                </div>
+              </Link>
+              <Link href="/scans">
+                <div className="bg-white rounded-xl p-6 text-center card-hover border border-gray-100 hover:border-purple-300">
+                  <div className="text-4xl mb-3">📡</div>
+                  <h3 className="font-bold text-gray-900">Scans & Radiology</h3>
+                  <p className="text-gray-400 text-xs mt-1">X-ray, MRI, CT & more</p>
+                </div>
+              </Link>
+            </div>
+          </section>
+
+          {/* ===== DOCTOR SPECIALTIES ===== */}
+          <section className="max-w-7xl mx-auto px-4 sm:px-6 pb-12">
             <h2 className="text-2xl font-bold mb-2">Browse by Specialty</h2>
             <p className="text-gray-500 mb-8">
               Choose a specialty to find the right doctor for you
@@ -103,9 +136,7 @@ export default function Home() {
                 <Link key={spec.id} href={`/doctors/${spec.id}`}>
                   <div className="specialty-card">
                     <div className="text-4xl mb-3">{spec.icon}</div>
-                    <h3 className="font-semibold text-gray-900 text-sm">
-                      {spec.name}
-                    </h3>
+                    <h3 className="font-semibold text-gray-900 text-sm">{spec.name}</h3>
                     <p className="text-gray-400 text-xs mt-1">{spec.nameAr}</p>
                   </div>
                 </Link>
@@ -113,8 +144,73 @@ export default function Home() {
             </div>
           </section>
 
+          {/* ===== PHARMACY / LABS / SCANS HIGHLIGHTS ===== */}
+          <section className="bg-white py-12">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6">
+              <h2 className="text-2xl font-bold mb-8 text-center">More Healthcare Services</h2>
+              <div className="grid md:grid-cols-3 gap-6">
+                {/* Pharmacy */}
+                <Link href="/pharmacy">
+                  <div className="border border-gray-100 rounded-2xl p-6 card-hover hover:border-green-300 group">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center text-2xl">💊</div>
+                      <h3 className="font-bold text-lg group-hover:text-green-600">Online Pharmacy</h3>
+                    </div>
+                    <p className="text-gray-500 text-sm mb-4">
+                      Order prescription & OTC medicines with home delivery. 20+ product categories available.
+                    </p>
+                    <ul className="text-xs text-gray-400 space-y-1">
+                      <li>✓ Pain relief, antibiotics, vitamins</li>
+                      <li>✓ Skincare & personal care</li>
+                      <li>✓ Diabetes & heart care medicines</li>
+                      <li>✓ Fast home delivery</li>
+                    </ul>
+                  </div>
+                </Link>
+
+                {/* Labs */}
+                <Link href="/labs">
+                  <div className="border border-gray-100 rounded-2xl p-6 card-hover hover:border-blue-300 group">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-2xl">🔬</div>
+                      <h3 className="font-bold text-lg group-hover:text-blue-600">Lab Tests</h3>
+                    </div>
+                    <p className="text-gray-500 text-sm mb-4">
+                      Book blood tests, hormone panels, checkup packages with home sample collection.
+                    </p>
+                    <ul className="text-xs text-gray-400 space-y-1">
+                      <li>✓ CBC, thyroid, vitamin D, HbA1c</li>
+                      <li>✓ Liver & kidney function</li>
+                      <li>✓ Allergy panels</li>
+                      <li>✓ Comprehensive checkup packages</li>
+                    </ul>
+                  </div>
+                </Link>
+
+                {/* Scans */}
+                <Link href="/scans">
+                  <div className="border border-gray-100 rounded-2xl p-6 card-hover hover:border-purple-300 group">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center text-2xl">📡</div>
+                      <h3 className="font-bold text-lg group-hover:text-purple-600">Scans & Radiology</h3>
+                    </div>
+                    <p className="text-gray-500 text-sm mb-4">
+                      Book X-rays, ultrasounds, CT scans, MRI and echocardiograms at top centers.
+                    </p>
+                    <ul className="text-xs text-gray-400 space-y-1">
+                      <li>✓ X-Ray, ultrasound, CT scan</li>
+                      <li>✓ MRI brain, spine, knee</li>
+                      <li>✓ Mammography</li>
+                      <li>✓ Echocardiogram</li>
+                    </ul>
+                  </div>
+                </Link>
+              </div>
+            </div>
+          </section>
+
           {/* Featured Doctors */}
-          <section className="max-w-7xl mx-auto px-4 sm:px-6 pb-12">
+          <section className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
             <h2 className="text-2xl font-bold mb-2">Top Rated Doctors</h2>
             <p className="text-gray-500 mb-8">
               Highest rated doctors across all specialties
@@ -129,57 +225,30 @@ export default function Home() {
           {/* How It Works */}
           <section className="bg-white py-12">
             <div className="max-w-7xl mx-auto px-4 sm:px-6">
-              <h2 className="text-2xl font-bold text-center mb-10">
-                How It Works
-              </h2>
+              <h2 className="text-2xl font-bold text-center mb-10">How It Works</h2>
               <div className="grid md:grid-cols-3 gap-8">
                 <div className="text-center">
                   <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <span className="text-2xl">1</span>
                   </div>
                   <h3 className="font-bold mb-2">Search</h3>
-                  <p className="text-gray-500 text-sm">
-                    Find doctors by specialty, name, or location
-                  </p>
+                  <p className="text-gray-500 text-sm">Find doctors, labs, scans or medicines</p>
                 </div>
                 <div className="text-center">
                   <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <span className="text-2xl">2</span>
                   </div>
                   <h3 className="font-bold mb-2">Book</h3>
-                  <p className="text-gray-500 text-sm">
-                    Choose a time slot and fill in your details
-                  </p>
+                  <p className="text-gray-500 text-sm">Pick a time and fill in your details</p>
                 </div>
                 <div className="text-center">
                   <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <span className="text-2xl">3</span>
                   </div>
-                  <h3 className="font-bold mb-2">Visit</h3>
-                  <p className="text-gray-500 text-sm">
-                    Visit the doctor at the scheduled time
-                  </p>
+                  <h3 className="font-bold mb-2">Done</h3>
+                  <p className="text-gray-500 text-sm">Get confirmation and visit at the scheduled time</p>
                 </div>
               </div>
-            </div>
-          </section>
-
-          {/* Zoho Flow Integration Banner */}
-          <section className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
-            <div className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl p-8 text-white text-center">
-              <h2 className="text-2xl font-bold mb-3">
-                Zoho Flow Integration Ready
-              </h2>
-              <p className="text-blue-100 mb-6 max-w-xl mx-auto">
-                This test site sends booking data to your Zoho Flow webhook.
-                Configure your webhook URL in settings to start testing.
-              </p>
-              <Link
-                href="/settings"
-                className="inline-block bg-white text-blue-700 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
-              >
-                Configure Webhook
-              </Link>
             </div>
           </section>
         </>

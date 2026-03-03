@@ -13,21 +13,25 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
             <span className="text-2xl font-bold text-primary-600">Vezeeta</span>
-            <span className="text-xs bg-yellow-400 text-yellow-900 px-2 py-0.5 rounded-full font-medium">
-              TEST
-            </span>
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-6">
-            <Link href="/" className="text-gray-600 hover:text-primary-600 font-medium">
+          <nav className="hidden md:flex items-center gap-1">
+            <Link href="/" className="text-gray-600 hover:text-primary-600 font-medium px-3 py-2 rounded-lg hover:bg-gray-50 text-sm">
               Home
             </Link>
-            <Link href="/dashboard" className="text-gray-600 hover:text-primary-600 font-medium">
-              Doctor Dashboard
+            <Link href="/pharmacy" className="text-gray-600 hover:text-green-600 font-medium px-3 py-2 rounded-lg hover:bg-gray-50 text-sm">
+              Pharmacy
             </Link>
-            <Link href="/settings" className="text-gray-600 hover:text-primary-600 font-medium">
-              Webhook Settings
+            <Link href="/labs" className="text-gray-600 hover:text-blue-600 font-medium px-3 py-2 rounded-lg hover:bg-gray-50 text-sm">
+              Lab Tests
+            </Link>
+            <Link href="/scans" className="text-gray-600 hover:text-purple-600 font-medium px-3 py-2 rounded-lg hover:bg-gray-50 text-sm">
+              Scans
+            </Link>
+            <div className="w-px h-6 bg-gray-200 mx-2" />
+            <Link href="/dashboard" className="text-gray-600 hover:text-primary-600 font-medium px-3 py-2 rounded-lg hover:bg-gray-50 text-sm">
+              Dashboard
             </Link>
           </nav>
 
@@ -48,15 +52,22 @@ export default function Header() {
 
         {/* Mobile Nav */}
         {menuOpen && (
-          <nav className="md:hidden pb-4 border-t border-gray-100 pt-2 flex flex-col gap-2">
-            <Link href="/" className="px-3 py-2 rounded-lg hover:bg-gray-50 text-gray-600" onClick={() => setMenuOpen(false)}>
+          <nav className="md:hidden pb-4 border-t border-gray-100 pt-2 flex flex-col gap-1">
+            <Link href="/" className="px-3 py-2 rounded-lg hover:bg-gray-50 text-gray-600 text-sm" onClick={() => setMenuOpen(false)}>
               Home
             </Link>
-            <Link href="/dashboard" className="px-3 py-2 rounded-lg hover:bg-gray-50 text-gray-600" onClick={() => setMenuOpen(false)}>
-              Doctor Dashboard
+            <Link href="/pharmacy" className="px-3 py-2 rounded-lg hover:bg-gray-50 text-gray-600 text-sm" onClick={() => setMenuOpen(false)}>
+              Pharmacy
             </Link>
-            <Link href="/settings" className="px-3 py-2 rounded-lg hover:bg-gray-50 text-gray-600" onClick={() => setMenuOpen(false)}>
-              Webhook Settings
+            <Link href="/labs" className="px-3 py-2 rounded-lg hover:bg-gray-50 text-gray-600 text-sm" onClick={() => setMenuOpen(false)}>
+              Lab Tests
+            </Link>
+            <Link href="/scans" className="px-3 py-2 rounded-lg hover:bg-gray-50 text-gray-600 text-sm" onClick={() => setMenuOpen(false)}>
+              Scans
+            </Link>
+            <div className="border-t border-gray-100 my-1" />
+            <Link href="/dashboard" className="px-3 py-2 rounded-lg hover:bg-gray-50 text-gray-600 text-sm" onClick={() => setMenuOpen(false)}>
+              Dashboard
             </Link>
           </nav>
         )}
