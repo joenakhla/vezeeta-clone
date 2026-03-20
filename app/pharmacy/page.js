@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { pharmacyCategories, pharmacyItems, getPharmacyItemsByCategory, SALESIQ_DEPARTMENTS } from '@/lib/data';
 import SalesIQDepartment from '@/components/SalesIQDepartment';
+import WhatsAppHelpButton from '@/components/WhatsAppHelpButton';
 
 export default function PharmacyPage() {
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -99,6 +100,7 @@ export default function PharmacyPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
       <SalesIQDepartment department={SALESIQ_DEPARTMENTS.DIAGNOSTICS} />
+<WhatsAppHelpButton />
 
       {/* Header */}
       <nav className="text-sm text-gray-500 mb-6">
