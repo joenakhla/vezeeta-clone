@@ -12,7 +12,7 @@ import { useState } from 'react';
  * Format: country code + number, no spaces or dashes.
  * Example Egypt: 201XXXXXXXXX
  */
-const WHATSAPP_NUMBER = '201000000000'; // ← CHANGE THIS to your WhatsApp Business number
+const WHATSAPP_NUMBER = '201050272796'; // ← CHANGE THIS to your WhatsApp Business number
 
 export default function WhatsAppHelpButton({ orderId, orderTotal, patientName }) {
   const [isOpen, setIsOpen] = useState(false);
